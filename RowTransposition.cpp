@@ -103,7 +103,7 @@ int main()
     do
     {
         string key;
-        int t, ch;
+        int ch;
         cout << "\nEnter the choice\n1) Encrypt\n2) Decrypt" << endl;
         cin >> ch;
         switch (ch)
@@ -128,8 +128,6 @@ int main()
         case 2:
         {
             string msg = getInput();
-            string key;
-            int t, ch;
             cout << "Enter the key" << endl;
             getline(cin >> ws, key);
             int n = key.length();
@@ -145,7 +143,7 @@ int main()
             break;
         }
         default:
-            cout << "Wrong Choice Enterred";
+            cout << "Wrong Choice Enterred" << endl;
             break;
         }
         cout << "Do you want to continue? (Y/N)" << endl;
