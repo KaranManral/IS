@@ -2,28 +2,80 @@
 
 using namespace std;
 
+string keyword = "";
+
 string generate_key(int n)
 {
     string key = "";
-    srand(time(NULL));
+
     for (int i = 0; i < n; i++)
-        key += (rand() % 2) + 48;
+
+        return key;
+}
+
+string encrypt()
+{
+    string msg = "", ct = "", key = "";
+    char t, ch;
+    int k = 0;
+    srand(time(NULL));
+    do
+    {
+        cout << "Enter the message in Binary" << endl;
+        cin >> t;
+        if (t == '0' || t == '1')
+        {
+            msg += t;
+            key += (rand() % 2) + 48;
+            ct += ((int(msg[k]) - 48) ^ (int(key[k]) - 48)) + 48;
+            cout << "Message = " << msg << endl;
+            cout << "Key= " << key << endl;
+            cout << "Encrypted Message = " << ct << endl;
+            cout << "Do you want to enter more text?(y/n)" << endl;
+            cin >> ch;
+            k++;
+        }
+        else
+        {
+            cout << "Invalid Input" << endl;
+            return key;
+        }
+    } while (ch == 'y' || ch == 'Y');
     return key;
 }
 
-string encrypt(string pt, string key)
+void decrypt(string key)
 {
-    string ct = "";
-    int n = pt.length();
-    for (int i = 0; i < n; i++)
-        ct += ((int(pt.at(i)) - 48) ^ (int(key.at(i)) - 48)) + 48;
-    return ct;
+    string msg = "", pt = "";
+    char t, ch;
+    int k = 0;
+    srand(time(NULL));
+    do
+    {
+        cout << "Enter the message in Binary" << endl;
+        cin >> t;
+        if (t == '0' || t == '1')
+        {
+            msg += t;
+            pt += ((int(msg[k]) - 48) ^ (int(key[k]) - 48)) + 48;
+            cout << "Message = " << msg << endl;
+            cout << "Key= " << key << endl;
+            cout << "Decrypted Message = " << pt << endl;
+            cout << "Do you want to enter more text?(y/n)" << endl;
+            cin >> ch;
+            k++;
+        }
+        else
+        {
+            cout << "Invalid Input" << endl;
+            exit(0);
+        }
+    } while ((ch == 'y' || ch == 'Y') && (k < key.length()));
 }
 
 int main()
 {
     char choice;
-    string key;
     do
     {
         int ch;
@@ -33,23 +85,17 @@ int main()
         {
         case 1:
         {
-            cout << "Enter the message in Binary" << endl;
-            string msg;
-            getline(cin >> ws, msg);
-            key = generate_key(msg.length());
-            cout << "PT = " << msg << endl;
-            cout << "Key= " << key << endl;
-            cout << "Encrypted Text = " << encrypt(msg, key) << endl;
+            keyword = encrypt();
             break;
         }
         case 2:
         {
-            cout << "Enter the message in Binary" << endl;
-            string msg;
-            getline(cin >> ws, msg);
-            cout << "CT = " << msg << endl;
-            cout << "Key= " << key << endl;
-            cout << "Decrypted Text = " << encrypt(msg, key) << endl;
+            if (keyword == "")
+            {
+                cout << "Enter the Key" << endl;
+                cin >> keyword;
+            }
+            decrypt(keyword);
             break;
         }
         default:

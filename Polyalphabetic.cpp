@@ -5,10 +5,17 @@ using namespace std;
 
 string getPT()
 {
-    string s;
+    string s, s1 = "";
     cout << "Enter the Message" << endl;
-    getline(cin, s);
-    return s;
+    getline(cin >> ws, s);
+    for (int i = 0; i < s.length(); i++)
+        if (s.at(i) == ' ')
+            continue;
+        else
+        {
+            s1 += tolower(s.at(i));
+        }
+    return s1;
 }
 
 string getKey(int l)
@@ -58,7 +65,7 @@ string decrypt(string msg, string key)
     string pt = "";
     for (int i = 0; i < msg.length(); i++)
     {
-        char a = (char)(((26 + (msg.at(i) - 65) - (key.at(i) - 97)) % 26) + 97);
+        char a = (char)(((26 + (msg.at(i) - 97) - (key.at(i) - 97)) % 26) + 97);
         pt += a;
     }
     return pt;
@@ -66,8 +73,6 @@ string decrypt(string msg, string key)
 
 int main()
 {
-    string msg = getPT();
-    string key = getKey(msg.length());
     char ch;
     cout << "Enter 1 to encrypt message \nEnter 2 to decrypt message" << endl;
     cin >> ch;
@@ -75,6 +80,8 @@ int main()
     {
     case '1':
     {
+        string msg = getPT();
+        string key = getKey(msg.length());
         cout << "Message = " << msg << endl;
         cout << "Key = " << key << endl;
         cout << "Encrypted Text = " << encrypt(msg, key);
@@ -82,6 +89,8 @@ int main()
     }
     case '2':
     {
+        string msg = getPT();
+        string key = getKey(msg.length());
         cout << "Message = " << msg << endl;
         cout << "Key = " << key << endl;
         cout << "Decrypted Text = " << decrypt(msg, key);
