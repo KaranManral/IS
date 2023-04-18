@@ -16,61 +16,68 @@ string generate_key(int n)
 string encrypt()
 {
     string msg = "", ct = "", key = "";
-    char t, ch;
-    int k = 0;
+    char t;
+    int n;
     srand(time(NULL));
-    do
+    cout << "Enter the length of message" << endl;
+    cin >> n;
+    for (int i = 0; i < n; i++)
     {
-        cout << "Enter the message in Binary" << endl;
+        cout << "\nEnter the message in Binary" << endl;
         cin >> t;
         if (t == '0' || t == '1')
         {
+            char ke = (rand() % 2) + 48;
+            char c = ((int(t) - 48) ^ (int(ke) - 48)) + 48;
             msg += t;
-            key += (rand() % 2) + 48;
-            ct += ((int(msg[k]) - 48) ^ (int(key[k]) - 48)) + 48;
-            cout << "Message = " << msg << endl;
-            cout << "Key= " << key << endl;
-            cout << "Encrypted Message = " << ct << endl;
-            cout << "Do you want to enter more text?(y/n)" << endl;
-            cin >> ch;
-            k++;
+            key += ke;
+            ct += c;
+            cout << "Message = " << t << endl;
+            cout << "Key = " << ke << endl;
+            cout << "Encrypted Message = " << c << endl;
         }
         else
         {
             cout << "Invalid Input" << endl;
             return key;
         }
-    } while (ch == 'y' || ch == 'Y');
+    }
+    cout << "\nFinal Message = " << msg << endl;
+    cout << "Final Key = " << key << endl;
+    cout << "Final Encrypted Message = " << ct << endl;
     return key;
 }
 
 void decrypt(string key)
 {
-    string msg = "", pt = "";
-    char t, ch;
+    string ct = "", pt = "";
+    char t;
+    int n = key.length();
     int k = 0;
-    srand(time(NULL));
-    do
+    for (int i = 0; i < n; i++)
     {
-        cout << "Enter the message in Binary" << endl;
+        cout << "\nEnter the ciphertext in Binary" << endl;
         cin >> t;
         if (t == '0' || t == '1')
         {
-            msg += t;
-            pt += ((int(msg[k]) - 48) ^ (int(key[k]) - 48)) + 48;
-            cout << "Message = " << msg << endl;
-            cout << "Key= " << key << endl;
-            cout << "Decrypted Message = " << pt << endl;
-            cout << "Do you want to enter more text?(y/n)" << endl;
-            cin >> ch;
+            char ke = key[k];
+            char p = ((int(t) - 48) ^ (int(ke) - 48)) + 48;
+            ct += t;
+            pt += p;
+            cout << "CT = " << t << endl;
+            cout << "Key = " << ke << endl;
+            cout << "Decrypted Text = " << p << endl;
             k++;
         }
         else
         {
             cout << "Invalid Input" << endl;
-            exit(0);
+            return;
         }
-    } while ((ch == 'y' || ch == 'Y') && (k < key.length()));
+    }
+    cout << "\nFinal Cipher Text = " << ct << endl;
+    cout << "Final Key Used = " << key << endl;
+    cout << "Final Decrypted Text = " << pt << endl;
 }
 
 int main()
@@ -93,7 +100,7 @@ int main()
             if (keyword == "")
             {
                 cout << "Enter the Key" << endl;
-                cin >> keyword;
+                getline(cin >> ws, keyword);
             }
             decrypt(keyword);
             break;
