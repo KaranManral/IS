@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include <algorithm>
+#include <stdexcept>
 
 using namespace std;
 
