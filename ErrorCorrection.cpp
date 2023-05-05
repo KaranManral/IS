@@ -33,7 +33,6 @@ int main()
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 7; j++)
             h_trans[j][i] = h[i][j];
-    // int r=0,c=0;
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 7; j++)
@@ -53,7 +52,7 @@ int main()
         cout << r[i];
     cout << "\n\nDecoding Table" << endl
          << "Syndrome\tCoset Leaders" << endl;
-    for (auto it = table.cbegin(); it != table.cend(); ++it)
+    for (map<string, string>::iterator it = table.begin(); it != table.end(); ++it)
     {
         cout << it->first << "\t\t" << it->second << endl;
     }
