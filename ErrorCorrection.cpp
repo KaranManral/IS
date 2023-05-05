@@ -1,3 +1,6 @@
+// v=1001011 r=1001111   1001011
+//                    H= 0101110
+//                       0010111
 #include <bits/stdc++.h>
 
 using namespace std;

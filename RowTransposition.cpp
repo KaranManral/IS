@@ -1,3 +1,5 @@
+// msg = the simplest possible transpositions
+
 #include <bits/stdc++.h>
 
 using namespace std;
